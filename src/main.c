@@ -4,6 +4,7 @@
 #include <dirent.h>    
 
 #include "tokens.h"
+// scanner.l
 
 int main(){
   enum token t;
@@ -11,7 +12,16 @@ int main(){
   {
     switch (t)
     {
+
       case METHOD:
+        break;
+      case VAR:
+        break;
+      case INHERITS:
+        break;
+      case CLASS:
+        break;
+      case OBJECT:
         break;
       default:
         break;

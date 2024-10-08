@@ -13,6 +13,7 @@
 /*flex scanner.l*/
 
 comentario "//".*\n
+cierre " "|"="|"{"
 
 nocero  [1-9]
 digdec  [0-9]
@@ -23,14 +24,8 @@ inval   [:!\x22#$&\x27#<=>?@^_`~]
 /*         \x22 son comillas dobles y \x27 son comillas simples */
 
 %%
-"programa"|"fin"|"leer"|"escribir"  {return PALABRA_RES;}
-{nocero}{digdec}+   {return CONSTANTE;}
-{letra}({letra}|{digdec})*  {return IDENTIFICADOR;}
-{caracterPuntuacion} {return CARACTER_PUNT;} 
-{comentario}|\n|\t|\0|\r|\s|" "    {;}
-{operador}  {return OPERADOR;}
-":="    {return ASIGNACION;}
-{nocero}({digdec}|{letra})*   {return CONSTANTE_INV;}
-{letra}{inval}*({inval}|{digdec}|{letra})+   {return IDENTIFICADOR_INV;}
-{inval}+    {return CADENA_DESC;}
+
+{comentario}|\n|.   {;}
+
+
 
