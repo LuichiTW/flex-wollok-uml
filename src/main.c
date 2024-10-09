@@ -12,16 +12,25 @@ int main(){
   {
     switch (t)
     {
-
-      case METHOD:
-        break;
-      case VAR:
-        break;
       case INHERITS:
+        if ((t = yylex()) == NOMBRE) {
+        }
         break;
       case CLASS:
+        if ((t = yylex()) == NOMBRE) {
+        }
         break;
       case OBJECT:
+        if ((t = yylex()) == NOMBRE) {
+        }
+        break;
+      case VAR:
+        if ((t = yylex()) == NOMBRE) {
+        }
+        break;
+      case METHOD:
+        if ((t = yylex()) == NOMBRE) {
+        }
         break;
       default:
         break;
