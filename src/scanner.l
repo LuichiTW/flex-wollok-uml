@@ -14,18 +14,22 @@
 
 comentario "//".*\n
 cierre " "|"="|"{"
-
-nocero  [1-9]
-digdec  [0-9]
-letra   [a-zA-Z]
-operador [*\/%+-]
-caracterPuntuacion [()\.;,]
-inval   [:!\x22#$&\x27#<=>?@^_`~]
-/*         \x22 son comillas dobles y \x27 son comillas simples */
+variable "var"|"const"
+method "method"
+property "property"
+objeto "object"
+class "class"
+inherits "inherits"
+nombre {.}*
 
 %%
 
 {comentario}|\n|.   {;}
+{objeto}  {return OBJECT;}
+{class} {return CLASS;}
+{variable}" "{property}? {return VAR;}
+{method}  {return METHOD;}
+{nombre}{cierre}  {return NOMBRE;}
 
 
 
