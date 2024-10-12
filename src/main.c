@@ -7,8 +7,6 @@
 #include "scanner.h"
 // scanner.l
 
-// ! bug en el override method no lo toma
-
 int main()
 {
   enum token t;

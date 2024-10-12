@@ -201,9 +201,6 @@ void *yyalloc ( yy_size_t  );
 void *yyrealloc ( void *, yy_size_t  );
 void yyfree ( void *  );
 
-#define yywrap() (/*CONSTCOND*/1)
-#define YY_SKIP_YYWRAP
-
 extern int yylineno;
 
 extern char *yytext;
@@ -467,8 +464,8 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 47 "scanner.l"
+#line 44 "scanner.l"
 
-#line 473 "scanner.h"
+#line 470 "scanner.h"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */
