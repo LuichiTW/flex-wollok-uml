@@ -8,6 +8,7 @@ int contador = 0;
 
 %option noinput
 %option nounput
+%option noyywrap
 %option outfile="scanner.c"
 %option header-file="scanner.h"
 
@@ -15,29 +16,31 @@ int contador = 0;
 /*flex scanner.l*/
 
 comentario "//".*\n
-cierre " "|"="|"{"
+cierre " "|"="|\n
 variable "var"|"const"
 method "method"
+override "override"
 property "property"
 objeto "object"
 class "class"
 inherits "inherits"
-nombre {letras}({letras}|{numeros})*
+nombreMethod {letras}({letras}|{numeros}|" "|[\(,])*")"
+nombreVar {letras}({letras}|{numeros})*
 
 letras [a-zA-Z]
 numeros [0-9]
 
+
 %%
 
-{comentario}|\n|.   {;}
 "{" {contador++;}
-"}" {contador--;}
-{{objeto}|{class}}" "{nombre}" "{inherits} {return INHERITS;}
+"}" {contador--; (contador == 0)? printf("}\n") : printf("\0");}
 {objeto}  {return OBJECT;}
-{class} {return CLASS;}
-{variable}" "{property}? {return if(contador == 0) ? INVAL : VAR;}
-{method}  {return METHOD;}
-{nombre}{cierre}  {contador++, return NOMBRE;}
-
-
-
+{class}  {return CLASS;}
+{variable}" "{property}? {return (contador == 0) ? INVAL : VAR;}
+"override method"  {return METHOD;}
+{override}?" "?{method}  {return METHOD;}
+{nombreVar} {return NOMBRE_VAR;}
+{nombreMethod}  {return NOMBRE_METHOD;} 
+({objeto}|{class})" "{nombreVar}" "{inherits} {return INHERITS;}
+{comentario}|\n|.   {;}
